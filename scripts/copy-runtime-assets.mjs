@@ -1,10 +1,11 @@
-﻿import { cpSync, existsSync, mkdirSync, readFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readFileSync } from 'node:fs';
 import { dirname, join, normalize } from 'node:path';
 
 const root = process.cwd();
 const dist = join(root, 'dist');
 const files = [
   'index.html',
+  'wangchao-video-case.html',
   'hbn-case.html',
   'chiwei-case.html',
   'new-media-case.html',

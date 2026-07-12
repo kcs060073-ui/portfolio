@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 
 const pages = [
   'index.html',
+  'wangchao-video-case.html',
   'hbn-case.html',
   'chiwei-case.html',
   'new-media-case.html',
