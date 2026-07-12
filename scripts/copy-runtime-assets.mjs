@@ -18,7 +18,9 @@ const files = [
   'src/ai-dither-background.js'
 ];
 
-const assetPaths = new Set();
+const assetPaths = new Set([
+  'assets/projects/wangchao-hichajiu-video.mp4'
+]);
 for (const file of files) {
   const text = readFileSync(join(root, file), 'utf8');
   for (const match of text.matchAll(/assets\/[^\s"'`)<]+/g)) {
