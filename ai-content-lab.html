@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI CONTENT LAB｜AI内容实验室</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <main class="hbnCasePage aiLabPage">
+      <a class="caseBackButton" href="index.html#works">返回项目</a>
+
+      <section class="caseHero aiLabHero">
+        <div class="caseContainer">
+          <p class="caseEyebrow">AI CONTENT / VIDEO EXPERIMENT / CREATIVE WORKFLOW</p>
+          <h1>AI CONTENT LAB<br />AI内容实验室</h1>
+          <p class="caseHeroLead">探索 AI 在短视频创意、视觉预演和内容生产流程中的应用。这里不是单个作品展示，而是一个会持续增加的 AI 视频实验墙。</p>
+          <div class="caseMetaTags"><span>AI生成</span><span>Prompt设计</span><span>视频创意</span><span>视觉预演</span><span>内容生产</span></div>
+        </div>
+      </section>
+
+      <section class="caseSection aiLabWall" id="ai-content-lab">
+        <div class="caseContainer">
+          <div class="caseSectionHeader aiLabHeader">
+            <span class="caseLabel">AI CONTENT LAB / SECTION 01</span>
+            <h2>AI内容实验室</h2>
+            <p>以视频墙的形式记录 AI 广告实验、AI 短片、AI 视觉设计与内容流程测试，方便未来继续扩展。</p>
+          </div>
+
+          <div class="aiVideoGrid">
+            <button class="aiVideoCard aiVideoCardActive js-ai-video-open" type="button" data-video-src="assets/projects/ai-content-lab/fengqi-racetrack-trailer_x264.mp4" data-video-title="风起赛道：全员加速 AI 综艺预告片">
+              <div class="aiVideoPreview">
+                <img src="assets/projects/ai-content-lab/ai-video-lab-cover.png" alt="风起赛道 AI 综艺预告片封面" loading="eager" fetchpriority="high" decoding="async" />
+                <div class="aiVideoShade"></div>
+                <div class="aiVideoTop"><b>01</b><span>AI CONTENT</span></div>
+                <div class="aiPlayMark">▶</div>
+              </div>
+              <div class="aiVideoBody">
+                <em>AI VARIETY TRAILER</em>
+                <h3>风起赛道：全员加速 AI 综艺预告片</h3>
+                <p>围绕综艺预告场景，利用 AI 完成世界观设定、镜头设计、视觉生成与后期整合。</p>
+                <div class="aiTagRow"><span>AI生成</span><span>Prompt设计</span><span>视频创意</span><span>视觉预演</span></div>
+              </div>
+            </button>
+
+            <article class="aiVideoCard aiVideoPlaceholder">
+              <div class="aiVideoPreview"><div class="aiPlaceholderOrb"></div><div class="aiVideoShade"></div><div class="aiVideoTop"><b>02</b><span>AI CONTENT</span></div></div>
+              <div class="aiVideoBody"><em>AI AD TEST</em><h3>AI广告实验</h3><p>后续可加入产品广告、品牌短片和社媒投放素材测试。</p><div class="aiTagRow"><span>广告创意</span><span>脚本生成</span><span>视觉测试</span></div></div>
+            </article>
+
+            <article class="aiVideoCard aiVideoPlaceholder warm">
+              <div class="aiVideoPreview"><div class="aiPlaceholderOrb"></div><div class="aiVideoShade"></div><div class="aiVideoTop"><b>03</b><span>AI CONTENT</span></div></div>
+              <div class="aiVideoBody"><em>AI SHORT FILM</em><h3>AI短片实验</h3><p>后续可收录叙事短片、人物设定与分镜生成类实验。</p><div class="aiTagRow"><span>故事设定</span><span>镜头语言</span><span>剪辑整合</span></div></div>
+            </article>
+
+            <article class="aiVideoCard aiVideoPlaceholder blue">
+              <div class="aiVideoPreview"><div class="aiPlaceholderOrb"></div><div class="aiVideoShade"></div><div class="aiVideoTop"><b>04</b><span>AI CONTENT</span></div></div>
+              <div class="aiVideoBody"><em>AI VISUAL DESIGN</em><h3>AI视觉设计</h3><p>后续可补充海报、封面、视觉预演和内容物料生成过程。</p><div class="aiTagRow"><span>视觉生成</span><span>封面设计</span><span>物料延展</span></div></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="caseSection aiWorkflowSection">
+        <div class="caseContainer">
+          <div class="caseSectionHeader narrow"><span class="caseLabel">WORKFLOW / SECTION 02</span><h2>从想法到可视化预演</h2><p>这类 AI 视频实验重点不是“生成一个画面”，而是把创意拆成可以执行的流程。</p></div>
+          <div class="caseProcess aiLabProcess"><span>概念设定</span><span>脚本拆解</span><span>镜头提示词</span><span>画面生成</span><span>剪辑整合</span><span>复盘优化</span></div>
+        </div>
+      </section>
+
+      <div class="aiVideoModal" id="aiVideoModal" aria-hidden="true">
+        <div class="aiVideoModalBackdrop" data-ai-video-close></div>
+        <div class="aiVideoModalPanel" role="dialog" aria-modal="true" aria-labelledby="aiVideoModalTitle">
+          <button class="aiVideoModalClose" type="button" data-ai-video-close>关闭</button>
+          <div class="aiVideoModalHeader"><span>AI CONTENT CASE</span><h3 id="aiVideoModalTitle">AI 视频实验</h3></div>
+          <video id="aiVideoPlayer" controls playsinline preload="metadata" poster="assets/projects/ai-content-lab/ai-video-lab-cover.png"></video>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const modal = document.querySelector('#aiVideoModal');
+      const player = document.querySelector('#aiVideoPlayer');
+      const title = document.querySelector('#aiVideoModalTitle');
+      const closeEls = document.querySelectorAll('[data-ai-video-close]');
+      document.querySelectorAll('.js-ai-video-open').forEach((card) => {
+        card.addEventListener('click', () => {
+          title.textContent = card.dataset.videoTitle || 'AI 视频实验';
+          player.src = card.dataset.videoSrc;
+          modal.classList.add('is-open');
+          modal.setAttribute('aria-hidden', 'false');
+          player.play().catch(() => {});
+        });
+      });
+      const closeModal = () => {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        player.pause();
+        player.removeAttribute('src');
+        player.load();
+      };
+      closeEls.forEach((el) => el.addEventListener('click', closeModal));
+      window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+      });
+    </script>
+        <script type="module" src="src/ai-dither-background.js"></script>
+      <script type="module" src="src/premium-motion.js"></script>
+      <script type="module" src="src/card-border-glow.js"></script>
+      <script type="module" src="src/liquid-ether-background.js"></script>
+  </body>
+</html>
