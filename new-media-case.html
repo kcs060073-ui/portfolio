@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
@@ -133,7 +133,7 @@
           <button class="videoModalClose" type="button" data-media-video-close>关闭</button>
           <div class="videoModalHeader"><span>CONTENT CASE</span><h3 id="mediaCaseVideoTitle">内容运营案例</h3></div>
           <video id="mediaCaseVideoPlayer" class="mediaCaseVideoPlayer" controls playsinline preload="metadata"></video>
-          <div class="mediaVideoFallback" id="mediaVideoFallback"><img loading="lazy" decoding="async" src="" alt="内容案例封面预览" /><p>当前页面已预留视频弹窗位置，放入对应视频文件后即可直接播放。</p></div>
+          <div class="mediaVideoFallback" id="mediaVideoFallback"><img loading="lazy" decoding="async" src="" alt="内容案例封面预览" /><p>视频暂时无法在此处播放。</p><a id="mediaVideoDirectLink" href="#" target="_blank" rel="noopener">直接打开视频</a></div>
         </div>
       </div>
     <script>
@@ -155,6 +155,7 @@
       const mediaTitle = document.querySelector('#mediaCaseVideoTitle');
       const mediaFallback = document.querySelector('#mediaVideoFallback');
       const mediaFallbackImg = mediaFallback ? mediaFallback.querySelector('img') : null;
+      const mediaDirectLink = document.querySelector('#mediaVideoDirectLink');
       const closeMediaButtons = document.querySelectorAll('[data-media-video-close]');
 
       const closeMediaModal = () => {
@@ -177,8 +178,10 @@
           else mediaPlayer.removeAttribute('poster');
           if (src) {
             mediaPlayer.setAttribute('src', src);
+            mediaPlayer.load();
             mediaPlayer.style.display = 'block';
             if (mediaFallback) mediaFallback.style.display = 'none';
+            if (mediaDirectLink) mediaDirectLink.setAttribute('href', src);
           } else {
             mediaPlayer.removeAttribute('src');
             mediaPlayer.style.display = 'none';
@@ -194,6 +197,11 @@
             mediaPlayer.play().catch(() => {});
           }
         });
+      });
+
+      mediaPlayer.addEventListener('error', () => {
+        mediaPlayer.style.display = 'none';
+        if (mediaFallback) mediaFallback.style.display = 'grid';
       });
 
       closeMediaButtons.forEach((button) => button.addEventListener('click', closeMediaModal));

@@ -20,7 +20,10 @@ const files = [
 ];
 
 const assetPaths = new Set([
-  'assets/projects/wangchao-hichajiu-video.mp4'
+  'assets/projects/wangchao-hichajiu-video.mp4',
+  'assets/projects/new-media-case/videos/content-ip-design.mp4',
+  'assets/projects/new-media-case/videos/event-content.mp4',
+  'assets/projects/new-media-case/videos/interview-content.mp4'
 ]);
 for (const file of files) {
   const text = readFileSync(join(root, file), 'utf8');
