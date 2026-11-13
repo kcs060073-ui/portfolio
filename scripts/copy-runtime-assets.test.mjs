@@ -15,7 +15,7 @@ function fixture() {
     writeFileSync(file, content);
     return file;
   };
-  for (const page of ['index', 'wangchao-video-case', 'feed-style-lab', 'hbn-case', 'chiwei-case', 'new-media-case', 'ai-content-lab', 'visual-storytelling-case', 'xizhu-yongqing-case']) write(`${page}.html`);
+  for (const page of ['index', 'wangchao-video-case', 'feed-style-lab', 'yuanliu-case', 'suojian-case', 'hbn-case', 'chiwei-case', 'new-media-case', 'ai-content-lab', 'visual-storytelling-case', 'xizhu-yongqing-case']) write(`${page}.html`);
   for (const module of ['premium-motion', 'card-border-glow', 'liquid-ether-background', 'contact-prism-background', 'ai-dither-background']) write(`src/${module}.js`);
   write('assets/projects/wangchao-hichajiu-video.mp4', 'video');
   for (const name of ['content-ip-design', 'event-content', 'interview-content']) write(`assets/projects/new-media-case/videos/${name}.mp4`, name);

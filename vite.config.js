@@ -5,6 +5,8 @@ const pages = [
   'index.html',
   'wangchao-video-case.html',
   'feed-style-lab.html',
+  'yuanliu-case.html',
+  'suojian-case.html',
   'hbn-case.html',
   'chiwei-case.html',
   'new-media-case.html',

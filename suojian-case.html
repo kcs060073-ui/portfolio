@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="溯剪：从参考视频分析出发，串联分镜、素材、剪辑、预览与审片的本地视频创作工作台，目前持续开发迭代中。" />
+    <title>溯剪｜参考视频分析与创作工作台 · 史铠畅作品集</title>
+    <link rel="stylesheet" href="src/styles.css" />
+    <link rel="stylesheet" href="src/product-projects.css" />
+  </head>
+  <body>
+    <main class="hbnCasePage toolCase suojianCase">
+      <a class="caseBackButton" href="index.html#products">返回工具与产品实践</a>
+      <header class="caseHero toolHero">
+        <div class="caseContainer">
+          <div class="toolHeroLayout">
+            <div><p class="caseEyebrow">SUOJIAN / VIDEO ANALYSIS / CREATIVE WORKBENCH</p><h1>溯剪<small>从参考片，走向新作品</small></h1><p class="caseHeroLead">从一条参考视频中梳理镜头、字幕与节奏，再结合自己的文案和素材推进制作。将参考片分析、分镜创作、素材剪辑与审片连接在同一套本地工作流程里。</p><span class="toolStatus">持续开发迭代中 · 含 Cutroom beta.8</span><div class="toolCardActions"><a class="projectButton" href="https://github.com/kcs060073-ui/suojian" target="_blank" rel="noopener noreferrer">查看 GitHub 项目 ↗</a><a class="toolRepoLink" href="#modules">了解三个工作模块 ↓</a></div></div>
+            <img class="toolHeroLogo" src="assets/projects/product-tools/suojian-icon.webp" alt="溯剪项目标识：紫色胶片与播放符号" width="600" height="600" />
+          </div>
+          <div class="caseMetaTags"><span>工具开发实践</span><span>参考视频分析</span><span>人机协作</span><span>剪辑工作流</span><span>本地浏览器工作台</span></div>
+          <div class="caseSummaryGrid">
+            <article><span>SCENARIO / 使用场景</span><p>视频创作需要从参考片提炼方法，再把新文案、素材和包装安排成自己的作品，分析与制作之间存在大量手动整理。</p></article>
+            <article><span>APPROACH / 产品思路</span><p>把“看懂参考片”与“生成新作品”分开组织，让分析结果成为可核对、可调整的制作参考，再逐步进入创作与交付。</p></article>
+            <article><span>STATUS / 当前阶段</span><p>已公开 Windows 本机源码快照，整合主工作台、园区 Vibe 与 Cutroom。功能持续迭代，实际能力取决于本机环境与配置。</p></article>
+          </div>
+        </div>
+      </header>
+      <section class="caseSection" id="modules" aria-labelledby="modules-title">
+        <div class="caseContainer">
+          <div class="caseSectionHeader"><span class="caseLabel">PRODUCT STRUCTURE / SECTION 01</span><h2 id="modules-title">三个模块，连接分析与制作</h2><p>以参考片分析为起点，根据创作任务进入视觉分镜或素材剪辑，最后回到预览、确认与交付。</p></div>
+          <div class="toolModuleMap">
+            <article><b>溯剪主工作台</b><p>读取参考视频，展示镜头、字幕、声音与节奏候选，形成可查看的剪辑蓝图，组织新脚本方案。</p></article>
+            <article><b>园区 Vibe</b><p>围绕园区视频与动画讲解组织分镜、视觉风格和模板，提供视觉创作与渲染相关组件。</p></article>
+            <article><b>Cutroom</b><p>登记本地素材、选择候选镜头、安排字幕和声音包装，推进预览、质检、审片与交付准备。</p></article>
+          </div>
+        </div>
+      </section>
+      <section class="caseSection" aria-labelledby="workflow-title">
+        <div class="caseContainer">
+          <div class="caseSectionHeader"><span class="caseLabel">CREATIVE WORKFLOW / SECTION 02</span><h2 id="workflow-title">把参考，转化为可执行的方案</h2><p>将参考片的观察结果落实到新脚本和素材安排中，每一步保留核对与调整的入口。</p></div>
+          <div class="toolWorkflow">
+            <article><span>01 / ANALYZE</span><h3>导入并分析参考片</h3><p>读取视频信息与镜头切点，整理字幕、声音和粗略节奏等候选信息。</p></article>
+            <article><span>02 / CHECK</span><h3>对照原片核对</h3><p>在播放器与时间线之间查看、定位和比较，确认字幕、镜头和声音标记。</p></article>
+            <article><span>03 / CREATE</span><h3>准备新文案与素材</h3><p>根据任务进入 Vibe 或 Cutroom，调整分镜、画面顺序、字幕与声音包装。</p></article>
+            <article><span>04 / REVIEW</span><h3>预览、审看与交付</h3><p>生成预览并处理检查提示，按实际流程准备成片或基础剪映草稿，继续人工编辑和审看。</p></article>
+          </div>
+        </div>
+      </section>
+      <section class="caseSection" aria-labelledby="decisions-title">
+        <div class="caseContainer">
+          <div class="caseSectionHeader"><span class="caseLabel">PRODUCT DECISIONS / SECTION 03</span><h2 id="decisions-title">让分析结果可理解、可复核</h2><p>围绕创作者的判断过程组织界面，让结构化信息能够与原片和实际制作动作连接。</p></div>
+          <div class="toolCapabilities">
+            <article class="toolCapability"><span>01 / 原片与分析联动</span><h3>边播放，边查看剪辑结构</h3><p>解析时可播放原片；时间线支持缩放、横向导览和定位，镜头悬浮信息提供制作方式初判与分工建议。</p></article>
+            <article class="toolCapability"><span>02 / 区分观察与创作</span><h3>参考蓝图与新作品分开保存</h3><p>分别组织参考片分析和新脚本方案，避免把原片信息直接等同于新作品的素材与字幕安排。</p></article>
+            <article class="toolCapability"><span>03 / 核对字幕与声音</span><h3>将识别结果作为候选信息</h3><p>分别查看语音识别、画面文字与字幕候选及其冲突，通过对照原片修正误识别，再服务后续创作。</p></article>
+            <article class="toolCapability"><span>04 / 保留创作者判断</span><h3>在确认与审片之后交付</h3><p>制作流程保留文案、画面、包装与完整审片的人工确认环节；最终输出取决于实际制作路线与可用环境。</p></article>
+          </div>
+        </div>
+      </section>
+      <section class="caseSection" aria-labelledby="scope-title">
+        <div class="caseContainer">
+          <div class="caseSectionHeader"><span class="caseLabel">STATUS & REFLECTION / SECTION 04</span><h2 id="scope-title">持续完善创作流程</h2><p>这项实践展示了我对视频创作流程、工具衔接与交互组织的持续探索。目前仍处于开发迭代阶段。</p></div>
+          <div class="toolScope"><p><strong>当前形态：</strong>运行在 Windows 本机，通过浏览器使用。仓库公开源码与安装入口，素材、模型和部分服务需在使用环境中准备。</p><p><strong>能力边界：</strong>镜头运动、字幕与声音等分析需要人工复核；复杂转场、花字和贴纸不能保证还原。剪映草稿的可编辑程度取决于生成路径、交付内容及剪映版本，部分集成仍待真实交付与实机验收。</p><p><strong>后续关注：</strong>继续验证分析结果的可用性、模块之间的衔接，以及从预览到实际交付的一致性。模板代码存在与完成实际制作验收，需要分别判断。</p></div>
+          <p class="toolSources">项目说明依据公开仓库整理：<a href="https://github.com/kcs060073-ui/suojian#readme" target="_blank" rel="noopener noreferrer">项目概览 ↗</a> · <a href="https://github.com/kcs060073-ui/suojian/blob/main/docs/updates/2026-11-11.md" target="_blank" rel="noopener noreferrer">2026-11-11 更新记录 ↗</a>。</p>
+        </div>
+      </section>
+      <footer class="caseContainer toolCaseFooter"><a class="projectButton" href="index.html#products">返回工具与产品实践</a><a class="toolRepoLink" href="yuanliu-case.html">另一个项目：源流 →</a></footer>
+    </main>
+  </body>
+</html>
