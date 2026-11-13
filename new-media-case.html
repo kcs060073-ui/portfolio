@@ -133,6 +133,7 @@
           <button class="videoModalClose" type="button" data-media-video-close>关闭</button>
           <div class="videoModalHeader"><span>CONTENT CASE</span><h3 id="mediaCaseVideoTitle">内容运营案例</h3></div>
           <video id="mediaCaseVideoPlayer" class="mediaCaseVideoPlayer" controls playsinline preload="metadata"></video>
+          <p id="mediaVideoFallback" role="status" style="display:none">视频暂时加载失败，请重试，或 <a id="mediaVideoDirectLink" target="_blank" rel="noopener">单独打开视频</a>。</p>
           <div class="mediaVideoFallback" id="mediaVideoFallback"><img loading="lazy" decoding="async" src="" alt="内容案例封面预览" /><p>视频暂时无法在此处播放。</p><a id="mediaVideoDirectLink" href="#" target="_blank" rel="noopener">直接打开视频</a></div>
         </div>
       </div>
@@ -200,7 +201,6 @@
       });
 
       mediaPlayer.addEventListener('error', () => {
-        mediaPlayer.style.display = 'none';
         if (mediaFallback) mediaFallback.style.display = 'grid';
       });
 

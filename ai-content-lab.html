@@ -28,7 +28,7 @@
           </div>
 
           <div class="aiVideoGrid">
-            <button class="aiVideoCard aiVideoCardActive js-ai-video-open" type="button" data-video-src="assets/projects/ai-content-lab/fengqi-racetrack-trailer_x264.mp4" data-video-title="风起赛道：全员加速 AI 综艺预告片">
+            <button class="aiVideoCard aiVideoCardActive js-ai-video-open" type="button" data-video-src="assets/projects/ai-content-lab/fengqi-stream/index.m3u8" data-video-title="风起赛道：全员加速 AI 综艺预告片">
               <div class="aiVideoPreview">
                 <img src="assets/projects/ai-content-lab/ai-video-lab-cover.png" alt="风起赛道 AI 综艺预告片封面" loading="eager" fetchpriority="high" decoding="async" />
                 <div class="aiVideoShade"></div>
@@ -73,37 +73,13 @@
         <div class="aiVideoModalPanel" role="dialog" aria-modal="true" aria-labelledby="aiVideoModalTitle">
           <button class="aiVideoModalClose" type="button" data-ai-video-close>关闭</button>
           <div class="aiVideoModalHeader"><span>AI CONTENT CASE</span><h3 id="aiVideoModalTitle">AI 视频实验</h3></div>
+          <p id="aiVideoStatus" role="status" hidden></p>
           <video id="aiVideoPlayer" controls playsinline preload="metadata" poster="assets/projects/ai-content-lab/ai-video-lab-cover.png"></video>
         </div>
       </div>
     </main>
 
-    <script>
-      const modal = document.querySelector('#aiVideoModal');
-      const player = document.querySelector('#aiVideoPlayer');
-      const title = document.querySelector('#aiVideoModalTitle');
-      const closeEls = document.querySelectorAll('[data-ai-video-close]');
-      document.querySelectorAll('.js-ai-video-open').forEach((card) => {
-        card.addEventListener('click', () => {
-          title.textContent = card.dataset.videoTitle || 'AI 视频实验';
-          player.src = card.dataset.videoSrc;
-          modal.classList.add('is-open');
-          modal.setAttribute('aria-hidden', 'false');
-          player.play().catch(() => {});
-        });
-      });
-      const closeModal = () => {
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
-        player.pause();
-        player.removeAttribute('src');
-        player.load();
-      };
-      closeEls.forEach((el) => el.addEventListener('click', closeModal));
-      window.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
-      });
-    </script>
+    <script type="module" src="src/ai-video-player.js"></script>
         <script type="module" src="src/ai-dither-background.js"></script>
       <script type="module" src="src/premium-motion.js"></script>
       <script type="module" src="src/card-border-glow.js"></script>

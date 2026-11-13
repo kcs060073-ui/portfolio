@@ -1,5 +1,5 @@
-import { cpSync, existsSync, mkdirSync, readFileSync } from 'node:fs';
-import { dirname, join, normalize } from 'node:path';
+import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import { dirname, join } from 'node:path';
 
 const root = process.cwd();
 const dist = join(root, 'dist');
@@ -21,6 +21,7 @@ const files = [
 ];
 
 const assetPaths = new Set([
+  'assets/projects/ai-content-lab/fengqi-stream',
   'assets/projects/wangchao-hichajiu-video.mp4',
   'assets/projects/new-media-case/videos/content-ip-design.mp4',
   'assets/projects/new-media-case/videos/event-content.mp4',
@@ -33,12 +34,40 @@ for (const file of files) {
   }
 }
 
+const missing = [...assetPaths].filter((assetPath) => !existsSync(join(root, assetPath)));
+if (missing.length) {
+  throw new Error(`Referenced runtime assets are missing:\n${missing.join('\n')}`);
+}
+
 for (const assetPath of assetPaths) {
-  const source = join(root, assetPath.replaceAll('/', '\\'));
-  if (!existsSync(source)) continue;
-  const target = join(dist, assetPath.replaceAll('/', '\\'));
+  // Forward slashes are supported on both Windows and Cloudflare's Linux builders.
+  const source = join(root, assetPath);
+  const target = join(dist, assetPath);
   mkdirSync(dirname(target), { recursive: true });
   cpSync(source, target, { force: true, recursive: true });
 }
 
 console.log(`Copied ${assetPaths.size} runtime asset paths into dist.`);
+
+function checkAssetSizes(directory) {
+  for (const entry of readdirSync(directory, { withFileTypes: true })) {
+    const file = join(directory, entry.name);
+    if (entry.isDirectory()) checkAssetSizes(file);
+    else if (statSync(file).size > 25 * 1024 * 1024) {
+      throw new Error(`Asset exceeds the Cloudflare Pages 25 MiB limit: ${file}`);
+    }
+    if (entry.isFile() && entry.name.endsWith('.m3u8')) {
+      const playlist = readFileSync(file, 'utf8');
+      const references = [
+        ...playlist.split(/\r?\n/).filter((line) => line && !line.startsWith('#')),
+        ...[...playlist.matchAll(/URI="([^"]+)"/g)].map((match) => match[1])
+      ];
+      for (const reference of references) {
+        if (!existsSync(join(dirname(file), reference))) {
+          throw new Error(`Streaming segment is missing: ${file} -> ${reference}`);
+        }
+      }
+    }
+  }
+}
+checkAssetSizes(dist);
