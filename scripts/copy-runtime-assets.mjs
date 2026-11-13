@@ -21,7 +21,6 @@ const files = [
 ];
 
 const assetPaths = new Set([
-  'assets/projects/ai-content-lab/fengqi-stream',
   'assets/projects/wangchao-hichajiu-video.mp4',
   'assets/projects/new-media-case/videos/content-ip-design.mp4',
   'assets/projects/new-media-case/videos/event-content.mp4',
@@ -30,7 +29,8 @@ const assetPaths = new Set([
 for (const file of files) {
   const text = readFileSync(join(root, file), 'utf8');
   for (const match of text.matchAll(/assets\/[^\s"'`)<]+/g)) {
-    assetPaths.add(match[0].replace(/[.,;]+$/, ''));
+    const asset = match[0].replace(/[.,;]+$/, '');
+    assetPaths.add(asset.endsWith('.m3u8') ? dirname(asset) : asset);
   }
 }
 

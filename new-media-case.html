@@ -66,16 +66,16 @@
           <div class="caseSectionHeader"><span class="caseLabel">CONTENT OPERATIONS / SECTION 05</span><h2>内容运营案例</h2><p>围绕校园场景完成选题策划、内容制作与传播运营的实践案例。</p></div>
           <div class="mediaFeaturedLabel"><span>FEATURED CONTENT</span><h3>精选内容案例</h3></div>
           <div class="mediaContentCaseLayout">
-            <button class="mediaContentCase mediaContentCaseFeatured js-media-case-open" type="button" data-video-title="原创栏目策划" data-video-src="assets/projects/new-media-case/videos/content-ip-design.mp4" data-video-poster="assets/projects/new-media-case/nm-video-01.jpg">
+            <button class="mediaContentCase mediaContentCaseFeatured js-media-case-open" type="button" data-video-title="原创栏目策划" data-video-src="assets/projects/new-media-case/videos/content-ip-design.mp4" data-video-stream="assets/projects/new-media-case/videos/content-ip-design-stream/index.m3u8" data-video-poster="assets/projects/new-media-case/nm-video-01.jpg">
               <div class="mediaCaseVisual"><video class="mediaCasePreviewVideo" data-src="assets/projects/new-media-case/videos/content-ip-design.mp4" poster="assets/projects/new-media-case/nm-video-01.jpg" muted playsinline preload="metadata" data-preview-time="1.2"></video><div class="mediaCaseShade"></div><div class="mediaCaseTop"><b>01</b><span>CONTENT CASE</span></div><div class="mediaCasePlay" aria-hidden="true">▶</div><div class="mediaCaseOverlay"><em>CONTENT IP DESIGN</em><h3>原创栏目策划</h3></div></div>
               <div class="mediaCaseBody"><h3>原创栏目策划</h3><p>从校园热点和学生需求出发，策划系列内容栏目，持续输出学院特色内容。</p><div class="mediaCaseTags"><span>选题策划</span><span>栏目运营</span><span>内容IP</span><span>视频制作</span></div></div>
             </button>
             <div class="mediaContentSideGrid">
-              <button class="mediaContentCase js-media-case-open" type="button" data-video-title="活动内容传播" data-video-src="assets/projects/new-media-case/videos/interview-content.mp4" data-video-poster="assets/projects/new-media-case/nm-video-02.jpg">
+              <button class="mediaContentCase js-media-case-open" type="button" data-video-title="活动内容传播" data-video-src="assets/projects/new-media-case/videos/interview-content.mp4" data-video-stream="assets/projects/new-media-case/videos/interview-content-stream/index.m3u8" data-video-poster="assets/projects/new-media-case/nm-video-02.jpg">
                 <div class="mediaCaseVisual"><video class="mediaCasePreviewVideo" data-src="assets/projects/new-media-case/videos/interview-content.mp4" poster="assets/projects/new-media-case/nm-video-02.jpg" muted playsinline preload="metadata" data-preview-time="1.2"></video><div class="mediaCaseShade"></div><div class="mediaCaseTop"><b>02</b><span>CONTENT CASE</span></div><div class="mediaCasePlay" aria-hidden="true">▶</div><div class="mediaCaseOverlay"><em>EVENT CONTENT</em><h3>活动内容传播</h3></div></div>
                 <div class="mediaCaseBody"><h3>活动内容传播</h3><p>围绕校园活动节点制作传播视频，通过现场记录、视觉包装和内容发布，提高活动触达范围和用户参与感。</p><div class="mediaCaseTags"><span>活动传播</span><span>视频制作</span><span>用户触达</span></div></div>
               </button>
-              <button class="mediaContentCase js-media-case-open" type="button" data-video-title="校园人物访谈" data-video-src="assets/projects/new-media-case/videos/event-content.mp4" data-video-poster="assets/projects/new-media-case/nm-design-01.jpg">
+              <button class="mediaContentCase js-media-case-open" type="button" data-video-title="校园人物访谈" data-video-src="assets/projects/new-media-case/videos/event-content.mp4" data-video-stream="assets/projects/new-media-case/videos/event-content-stream/index.m3u8" data-video-poster="assets/projects/new-media-case/nm-design-01.jpg">
                 <div class="mediaCaseVisual"><video class="mediaCasePreviewVideo" data-src="assets/projects/new-media-case/videos/event-content.mp4" poster="assets/projects/new-media-case/nm-design-01.jpg" muted playsinline preload="metadata" data-preview-time="1.2"></video><div class="mediaCaseShade"></div><div class="mediaCaseTop"><b>03</b><span>CONTENT CASE</span></div><div class="mediaCasePlay" aria-hidden="true">▶</div><div class="mediaCaseOverlay"><em>INTERVIEW CONTENT</em><h3>校园人物访谈</h3></div></div>
                 <div class="mediaCaseBody"><h3>校园人物访谈</h3><p>通过人物采访形式挖掘校园故事，完成从采访策划、现场执行到视频呈现的完整内容流程。</p><div class="mediaCaseTags"><span>人物采访</span><span>脚本策划</span><span>视频剪辑</span></div></div>
               </button>
@@ -137,7 +137,8 @@
           <div class="mediaVideoFallback" id="mediaVideoFallback"><img loading="lazy" decoding="async" src="" alt="内容案例封面预览" /><p>视频暂时无法在此处播放。</p><a id="mediaVideoDirectLink" href="#" target="_blank" rel="noopener">直接打开视频</a></div>
         </div>
       </div>
-    <script>
+    <script type="module">
+      import { setVideoSource, resetVideoSource } from "./src/video-source.js";
       const previewObserver = 'IntersectionObserver' in window ? new IntersectionObserver((entries, observer) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
@@ -161,8 +162,7 @@
 
       const closeMediaModal = () => {
         if (!mediaModal || !mediaPlayer) return;
-        mediaPlayer.pause();
-        mediaPlayer.removeAttribute('src');
+        resetVideoSource(mediaPlayer);
         mediaPlayer.removeAttribute('poster');
         mediaPlayer.load();
         mediaModal.classList.remove('is-open');
@@ -172,17 +172,16 @@
       document.querySelectorAll('.js-media-case-open').forEach((card) => {
         card.addEventListener('click', () => {
           if (!mediaModal || !mediaPlayer) return;
-          const src = card.dataset.videoSrc || '';
+          const src = card.dataset.videoStream || card.dataset.videoSrc || '';
           const poster = card.dataset.videoPoster || '';
           if (mediaTitle && card.dataset.videoTitle) mediaTitle.textContent = card.dataset.videoTitle;
           if (poster) mediaPlayer.setAttribute('poster', poster);
           else mediaPlayer.removeAttribute('poster');
           if (src) {
-            mediaPlayer.setAttribute('src', src);
-            mediaPlayer.load();
+            setVideoSource(mediaPlayer, src);
             mediaPlayer.style.display = 'block';
             if (mediaFallback) mediaFallback.style.display = 'none';
-            if (mediaDirectLink) mediaDirectLink.setAttribute('href', src);
+            if (mediaDirectLink) mediaDirectLink.setAttribute('href', card.dataset.videoSrc);
           } else {
             mediaPlayer.removeAttribute('src');
             mediaPlayer.style.display = 'none';
@@ -193,13 +192,11 @@
           }
           mediaModal.classList.add('is-open');
           mediaModal.setAttribute('aria-hidden', 'false');
-          if (src) {
-            mediaPlayer.currentTime = 0;
-            mediaPlayer.play().catch(() => {});
-          }
+
         });
       });
 
+      mediaPlayer.addEventListener('video-source-error', () => { mediaFallback.style.display = 'grid'; });
       mediaPlayer.addEventListener('error', () => {
         if (mediaFallback) mediaFallback.style.display = 'grid';
       });

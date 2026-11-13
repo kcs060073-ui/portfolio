@@ -21,6 +21,7 @@ function fixture() {
   for (const name of ['content-ip-design', 'event-content', 'interview-content']) write(`assets/projects/new-media-case/videos/${name}.mp4`, name);
   write('assets/projects/ai-content-lab/fengqi-stream/index.m3u8', '#EXTM3U\n#EXT-X-MAP:URI="init.mp4"\n#EXTINF:8,\npart.m4s\n#EXT-X-ENDLIST\n');
   write('assets/projects/ai-content-lab/fengqi-stream/init.mp4', 'init');
+  write('ai-content-lab.html', '<button data-video-src="assets/projects/ai-content-lab/fengqi-stream/index.m3u8"></button>');
   write('assets/projects/ai-content-lab/fengqi-stream/part.m4s', 'segment');
   return { root, write, run: () => spawnSync(process.execPath, [script], { cwd: root, encoding: 'utf8' }) };
 }

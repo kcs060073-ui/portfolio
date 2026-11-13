@@ -5570,7 +5570,7 @@ body::after {
   filter: contrast(1.06);
 }
 
-.aiLabPage > *:not(.aiDitherCanvas) {
+.aiLabPage > *:not(.aiDitherCanvas):not(.aiVideoModal):not(.caseBackButton) {
   position: relative;
   z-index: 1;
 }
