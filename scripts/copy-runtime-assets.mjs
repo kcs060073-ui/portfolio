@@ -6,6 +6,7 @@ const dist = join(root, 'dist');
 const files = [
   'index.html',
   'wangchao-video-case.html',
+  'feed-style-lab.html',
   'hbn-case.html',
   'chiwei-case.html',
   'new-media-case.html',
