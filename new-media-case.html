@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>校园新媒体内容运营实践 | 项目详情</title>
     <link rel="stylesheet" href="src/styles.css" />
-  </head>
+  <link rel="stylesheet" href="src/layout-polish.css" />
+</head>
   <body>
     <main class="hbnCasePage mediaCasePage">
       <a class="caseBackButton" href="index.html#timeline">返回项目</a>
@@ -133,8 +134,8 @@
           <button class="videoModalClose" type="button" data-media-video-close>关闭</button>
           <div class="videoModalHeader"><span>CONTENT CASE</span><h3 id="mediaCaseVideoTitle">内容运营案例</h3></div>
           <video id="mediaCaseVideoPlayer" class="mediaCaseVideoPlayer" controls playsinline preload="metadata"></video>
-          <p id="mediaVideoFallback" role="status" style="display:none">视频暂时加载失败，请重试，或 <a id="mediaVideoDirectLink" target="_blank" rel="noopener">单独打开视频</a>。</p>
-          <div class="mediaVideoFallback" id="mediaVideoFallback"><img loading="lazy" decoding="async" src="" alt="内容案例封面预览" /><p>视频暂时无法在此处播放。</p><a id="mediaVideoDirectLink" href="#" target="_blank" rel="noopener">直接打开视频</a></div>
+            <p id="mediaVideoFallback" class="videoStatus" role="status" style="display:none">视频暂时加载失败，请使用下方入口单独打开。微信内仍无法播放时，可用系统浏览器打开本站。</p>
+            <div class="videoHelp"><a id="mediaVideoDirectLink" href="assets/projects/new-media-case/videos/content-ip-design.mp4" target="_blank" rel="noopener">单独打开视频 ↗</a></div>
         </div>
       </div>
     <script type="module">
@@ -148,6 +149,7 @@
         });
       }, { rootMargin: '240px 0px' }) : null;
       document.querySelectorAll('.mediaCasePreviewVideo').forEach((video) => {
+        if (video.poster && matchMedia('(pointer: coarse)').matches) return;
         if (previewObserver) previewObserver.observe(video);
         else { video.setAttribute('src', video.dataset.src); video.load(); }
       });
@@ -156,7 +158,6 @@
       const mediaPlayer = document.querySelector('#mediaCaseVideoPlayer');
       const mediaTitle = document.querySelector('#mediaCaseVideoTitle');
       const mediaFallback = document.querySelector('#mediaVideoFallback');
-      const mediaFallbackImg = mediaFallback ? mediaFallback.querySelector('img') : null;
       const mediaDirectLink = document.querySelector('#mediaVideoDirectLink');
       const closeMediaButtons = document.querySelectorAll('[data-media-video-close]');
 
@@ -177,29 +178,31 @@
           if (mediaTitle && card.dataset.videoTitle) mediaTitle.textContent = card.dataset.videoTitle;
           if (poster) mediaPlayer.setAttribute('poster', poster);
           else mediaPlayer.removeAttribute('poster');
+          mediaModal.classList.add('is-open');
+          mediaModal.setAttribute('aria-hidden', 'false');
           if (src) {
-            setVideoSource(mediaPlayer, src);
+            setVideoSource(mediaPlayer, src, true, card.dataset.videoSrc);
             mediaPlayer.style.display = 'block';
             if (mediaFallback) mediaFallback.style.display = 'none';
             if (mediaDirectLink) mediaDirectLink.setAttribute('href', card.dataset.videoSrc);
           } else {
             mediaPlayer.removeAttribute('src');
             mediaPlayer.style.display = 'none';
-            if (mediaFallback && mediaFallbackImg) {
-              mediaFallbackImg.setAttribute('src', poster);
-              mediaFallback.style.display = 'grid';
-            }
+            if (mediaFallback) mediaFallback.style.display = 'block';
           }
-          mediaModal.classList.add('is-open');
-          mediaModal.setAttribute('aria-hidden', 'false');
 
         });
       });
 
-      mediaPlayer.addEventListener('video-source-error', () => { mediaFallback.style.display = 'grid'; });
-      mediaPlayer.addEventListener('error', () => {
-        if (mediaFallback) mediaFallback.style.display = 'grid';
+      mediaPlayer.addEventListener('video-source-error', () => {
+        mediaFallback.textContent = '视频暂时加载失败，请使用下方入口单独打开。微信内仍无法播放时，可用系统浏览器打开本站。';
+        mediaFallback.style.display = 'block';
       });
+      mediaPlayer.addEventListener('video-play-blocked', () => {
+        mediaFallback.textContent = '请点播放器中的播放按钮开始观看。';
+        mediaFallback.style.display = 'block';
+      });
+      mediaPlayer.addEventListener('playing', () => { mediaFallback.style.display = 'none'; });
 
       closeMediaButtons.forEach((button) => button.addEventListener('click', closeMediaModal));
       window.addEventListener('keydown', (event) => {

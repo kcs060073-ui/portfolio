@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI CONTENT LAB｜AI内容实验室</title>
     <link rel="stylesheet" href="src/styles.css" />
-  </head>
+  <link rel="stylesheet" href="src/layout-polish.css" />
+</head>
   <body>
     <main class="hbnCasePage aiLabPage">
       <a class="caseBackButton" href="index.html#works">返回项目</a>
@@ -28,7 +29,7 @@
           </div>
 
           <div class="aiVideoGrid">
-            <button class="aiVideoCard aiVideoCardActive js-ai-video-open" type="button" data-video-src="assets/projects/ai-content-lab/fengqi-stream/index.m3u8" data-video-title="风起赛道：全员加速 AI 综艺预告片">
+            <button class="aiVideoCard aiVideoCardActive js-ai-video-open" type="button" data-video-src="assets/projects/ai-content-lab/fengqi-stream/index.m3u8" data-video-mp4="assets/projects/ai-content-lab/fengqi-mobile.mp4" data-video-title="风起赛道：全员加速 AI 综艺预告片">
               <div class="aiVideoPreview">
                 <img src="assets/projects/ai-content-lab/ai-video-lab-cover.png" alt="风起赛道 AI 综艺预告片封面" loading="eager" fetchpriority="high" decoding="async" />
                 <div class="aiVideoShade"></div>
@@ -75,6 +76,7 @@
           <div class="aiVideoModalHeader"><span>AI CONTENT CASE</span><h3 id="aiVideoModalTitle">AI 视频实验</h3></div>
           <p id="aiVideoStatus" role="status" hidden></p>
           <video id="aiVideoPlayer" controls playsinline preload="metadata" poster="assets/projects/ai-content-lab/ai-video-lab-cover.png"></video>
+          <div class="videoHelp"><a id="aiVideoDirectLink" href="assets/projects/ai-content-lab/fengqi-mobile.mp4" target="_blank" rel="noopener">单独打开视频 ↗</a><button id="aiVideoRetry" type="button">重新播放</button><button id="aiVideoQuality" type="button" data-hd="false">切换原画质</button><span>手机默认流畅版，完整时长保留。</span></div>
         </div>
       </div>
     </main>

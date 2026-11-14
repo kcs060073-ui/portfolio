@@ -1,0 +1,194 @@
+/* Layout and typography pass: retain the existing artwork, gradients and motion. */
+:root { --portfolio-width: 1280px; --portfolio-gutter: clamp(20px, 4.5vw, 72px); }
+html { scroll-padding-top: 112px; }
+.siteShell { width: min(1680px, calc(100% - 48px)); margin: 24px auto; }
+.siteShell .container, .aboutMagazine .resumeInner, .caseContainer { width: min(var(--portfolio-width), calc(100% - 2 * var(--portfolio-gutter))); margin-inline: auto; }
+.siteShell > :is(.aboutMagazine,.strengthsMagazine,.projectsCore,.productProjects,.extendedPractice) { padding-block: clamp(72px, 7vw, 112px); }
+.portfolioHero { min-height: min(960px, calc(100svh - 48px)); }
+.portfolioHeroContent { min-height: min(960px, calc(100svh - 48px)); padding-block: 140px 56px; display: flex; flex-direction: column; justify-content: center; }
+.portfolioHeroContent h1 { font-size: clamp(54px, 6.6vw, 100px); line-height: 1.12; margin: 28px 0; }
+.portfolioHeroContent h2 { font-size: clamp(17px, 1.8vw, 25px); line-height: 1.6; margin: 0; }
+.portfolioHeroContent .heroBadge { margin-bottom: 0; }
+.portfolioHeroContent > p { max-width: 660px; font-size: 17px; line-height: 1.9; }
+.portfolioHeroContent .heroActions { margin-top: 28px; }
+.portfolioHeroContent .heroTags { margin-top: 24px; gap: 12px; }
+.portfolioHeroContent .heroTags span { min-height: 36px; }
+.portfolioNav { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); margin: 0; width: min(var(--portfolio-width), calc(100% - 2 * var(--portfolio-gutter))); }
+.portfolioNav.is-floating { width: min(var(--portfolio-width), calc(100vw - 48px))!important; }
+.portfolioNavLinks { gap: clamp(16px, 2vw, 32px); }
+.portfolioNavLinks a { white-space: nowrap; font-size: 14px; }
+.portfolioNav .portfolioContact { color: #151611!important; }
+.portfolioMenuToggle { font-family: inherit; }
+.aboutMagazine .resumeHeading { margin-bottom: 40px; }
+.aboutMagazine .resumeMain { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: center; }
+.aboutMagazine .resumePortrait { width: 100%; min-height: 0; height: 520px; margin: 0; background-position: 50% 42%; }
+.aboutMagazine .resumeProfile h3 { font-size: clamp(36px, 4vw, 60px); line-height: 1.25; }
+.aboutMagazine .resumePosition { font-size: clamp(18px, 1.6vw, 23px); line-height: 1.65; margin-bottom: 20px; }
+.aboutMagazine .resumeIntro { font-size: 16px; line-height: 1.9; }
+.aboutProjectData { margin-top: 32px; padding-top: 32px; }
+.resumeNumbers strong { font-size: clamp(30px, 3vw, 44px); line-height: 1.25; }
+.aboutExperienceCards { gap: 20px; margin-top: 40px; }
+.aboutExperienceCards a { padding: 24px; min-width: 0; }
+.aboutExperienceCards h4 { line-height: 1.45; }
+.aboutExperienceCards p { font-size: 15px; line-height: 1.8; }
+.strengthsHeader, .projectSectionHeader { gap: 48px; align-items: start; margin-bottom: 48px; }
+.strengthsHeader h2, .projectSectionHeader h2 { font-size: 14px; line-height: 1.5; font-weight: 500; letter-spacing: .12em; }
+.projectSectionHeader { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.projectSectionHeader > div:first-child, .strengthsHeader > div:first-child { align-self: start; }
+.projectSectionHeader > div:first-child > span, .strengthsHeader > div:first-child > span { line-height: 1.2!important; padding-bottom: 4px; }
+.projectLead { max-width: 600px; font-size: 16px; line-height: 1.85; }
+.projectLead .projectSub { font-size: 19px; font-weight: 500; line-height: 1.75; }
+.strengthsGrid { gap: 20px; }
+.strengthCard { padding: 28px; min-width: 0; }
+.strengthCard .strengthDesc { font-size: 16px; line-height: 1.85; }
+.coreProjectGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+.coreProjectGrid .projectFeatureCard { min-height: 0; display: flex; flex-direction: column; }
+.coreProjectGrid .feedFeatureCard { grid-column: auto; }
+.coreProjectGrid .projectCover { height: 320px; min-height: 320px; flex: 0 0 320px; }
+.coreProjectGrid .projectCoverFeed { padding: 20px 24px 52px; }
+.coreProjectGrid .feedCoverPair { height: 248px; gap: 24px; }
+.coreProjectGrid .feedCoverCaption { left: 24px; right: 24px; bottom: 16px; }
+.coreProjectGrid .projectBody, .productProjectGrid .projectBody { padding: 32px; }
+.projectBody h3 { font-size: clamp(24px, 2.2vw, 32px); line-height: 1.4; overflow-wrap: anywhere; }
+.projectFeatureCard .projectBody h3 { min-height: 2.8em; }
+.projectType { font-size: 14px; line-height: 1.75; }
+.projectText { font-size: 16px; line-height: 1.85; color: rgba(245,240,231,.76); }
+.projectTags { margin: 24px 0; gap: 8px; }
+.projectTags span { font-size: 13px; }
+.projectButton, .heroPrimary, .heroSecondary, .toolRepoLink { min-height: 44px; }
+.productProjectGrid { gap: 28px; align-items: stretch; }
+.toolCard { display: flex; flex-direction: column; }
+.toolCardVisual { padding: 32px; min-height: 210px; gap: 24px; }
+.toolCardVisual img { width: 120px; height: 120px; object-fit: contain; }
+.toolCardVisual strong { font-size: 40px; }
+.toolCardVisual small { font-size: 13px; }
+.toolCard .projectText { min-height: 0; }
+.toolCard .projectBody { flex: 1; }
+.toolCard .projectTags { margin-top: auto; padding-top: 24px; }
+.extendedProjectGrid { gap: 28px; }
+.projectSmallCard { grid-template-columns: minmax(160px,.38fr) minmax(0,1fr); min-height: 0; }
+.projectSmallCard .projectBody { padding: 28px; }
+.projectSmallCard .projectBody h3 { font-size: 25px; line-height: 1.45; }
+.projectSmallCard .projectText { font-size: 15px; line-height: 1.85; }
+.projectSmallCard .projectMiniCover { min-width: 0; padding: 24px; font-size: 25px; }
+.contactFinal .contactInner { width: min(var(--portfolio-width), calc(100% - 2 * var(--portfolio-gutter))); gap: 48px; }
+.contactFinal .contactFinalTitle { font-size: clamp(54px, 6vw, 96px)!important; line-height: 1.15!important; margin: 32px 0!important; }
+.contactFinal .contactCopy { min-width: 0; }
+.contactFinal .contactFinalTitle span { max-width: 100%; }
+.caseHeroLead, .caseSectionHeader p, .caseCopy p { line-height: 1.9; }
+.caseSectionHeader { margin-bottom: 40px; }
+.caseSummaryGrid, .caseInsightGrid, .caseStepGrid, .caseRoleGrid { gap: 24px; }
+.caseSummaryGrid p, .caseInsightGrid p, .caseRoleGrid p, .toolWorkflow p, .toolCapability p, .toolScope p, .toolModuleMap p, .feedFilmBody p, .feedApproachGrid p, .feedReview p { font-size: 16px; line-height: 1.85; }
+.toolHeroLayout { gap: 48px; }
+.caseBackButton { min-height: 44px; }
+/* Keep content readable if JavaScript cannot initialize. The normal reveal
+   animation still runs after the observer explicitly takes ownership. */
+.reveal:not(.is-observed) { opacity: 1; transform: none; }
+body:not(.motion-ready) .strengthDesc { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .strengthDesc { opacity: 1; transform: none; } }
+.videoHelp { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 20px; padding-top: 16px; color: #f5f0e7b8; font-size: 14px; line-height: 1.7; }
+.videoHelp a, .videoHelp button { min-height: 44px; display: inline-flex; align-items: center; padding: 8px 0; color: #b7ff2f; text-decoration: underline; text-underline-offset: 5px; }
+.videoHelp button { background: transparent; border: 0; font: inherit; cursor: pointer; }
+.videoStatus:empty { display: none; }
+.videoStatus { color: #f5f0e7b8; font-size: 14px; line-height: 1.7; }
+.portfolioMenuToggle { display: none; }
+.portfolioMobileMenu[hidden] { display: none; }
+.portfolioMobileMenu { position: fixed; z-index: 3100; top: 86px; left: 20px; right: 20px; padding: 16px 24px; border: 1px solid #f5f0e74a; border-radius: 20px; background: #101310ee; backdrop-filter: blur(24px); box-shadow: 0 20px 60px #0008; }
+.portfolioMobileMenu a { display: flex; align-items: center; min-height: 52px; color: #f5f0e7; font-size: 17px; text-decoration: none; }
+:is(a,button,video):focus-visible { outline: 2px solid #b7ff2f; outline-offset: 5px; }
+@media (min-width: 981px) and (max-width: 1200px) {
+  .projectSmallCard { display: flex; flex-direction: column; }
+  .projectSmallCard .projectMiniCover { height: 260px; min-height: 260px; }
+}
+@media (max-width: 980px) {
+  .siteShell { width: calc(100% - 28px); margin: 14px auto; }
+  .portfolioHero { min-height: 820px; }
+  .portfolioHeroContent { padding-top: 132px; padding-bottom: 48px; }
+  .portfolioHeroContent h1 { font-size: clamp(42px, 7.5vw, 74px); max-width: 100%; }
+  .aboutMagazine .resumeMain { gap: 32px; }
+  .aboutMagazine .resumePortrait { height: 460px; }
+  .aboutMagazine .resumeProfile h3 { font-size: 36px; }
+  .aboutExperienceCards { grid-template-columns: 1fr; gap: 16px; }
+  .strengthsHeader, .projectSectionHeader { gap: 28px; }
+  .projectSectionHeader { grid-template-columns: 1fr; }
+  .coreProjectGrid .projectCover { height: 280px; min-height: 280px; flex-basis: 280px; }
+  .coreProjectGrid .feedCoverPair { height: 208px; gap: 12px; }
+  .coreProjectGrid .projectBody, .productProjectGrid .projectBody { padding: 24px; }
+  .projectFeatureCard .projectBody h3 { min-height: 0; }
+  .toolCardVisual { min-height: 200px; padding: 24px; flex-direction: row; flex-wrap: wrap; }
+  .toolCardVisual img { width: 96px; height: 96px; }
+  .toolCardVisual strong { font-size: 34px; }
+  .extendedProjectGrid { grid-template-columns: 1fr; }
+  .projectSmallCard { grid-template-columns: minmax(180px,.4fr) minmax(0,1fr); }
+  .has-mobile-menu .portfolioMenuToggle { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid #f5f0e74a; border-radius: 50%; background: #ffffff14; color: #f5f0e7; cursor: pointer; }
+  .portfolioNav.has-mobile-menu { display: flex; gap: 12px; padding: 8px 12px; }
+  .has-mobile-menu .portfolioContact { margin-left: auto; }
+  .has-mobile-menu .portfolioNavLinks { display: none; }
+}
+@media (max-width: 640px) {
+  :root { --portfolio-gutter: 22px; }
+  .siteShell { width: calc(100% - 16px); margin: 8px auto; border-radius: 24px; }
+  .siteShell > :is(.aboutMagazine,.strengthsMagazine,.projectsCore,.productProjects,.extendedPractice) { padding-block: 64px; }
+  .portfolioHero { min-height: max(740px, calc(100svh - 16px)); }
+  .portfolioHeroContent { padding-top: 132px; padding-bottom: 48px; }
+  .portfolioHeroContent h1 { font-size: clamp(28px, 8.7vw, 48px); line-height: 1.24; margin: 24px 0; }
+  .portfolioHeroContent h2 { max-width: 22em; font-size: 17px; line-height: 1.8; }
+  .portfolioHeroContent > p { font-size: 16px; line-height: 1.9; }
+  .portfolioHeroContent > p br { display: none; }
+  .heroBadge { max-width: 100%; font-size: 11px; line-height: 1.6; }
+  .magazineActions { display: flex; gap: 12px; }
+  .magazineActions a { flex: 1; padding-inline: 16px; }
+  .heroTags { display: grid!important; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px!important; }
+  .heroTags span { justify-content: center; font-size: 13px; }
+  .portfolioNav, .portfolioNav.is-floating { width: calc(100% - 32px)!important; }
+  .portfolioBrand { min-width: 0; padding: 10px 16px; font-size: 16px; }
+  .portfolioContact { min-width: 0; font-size: 14px; padding: 10px 16px; }
+  .portfolioMobileMenu { top: 80px; }
+  .aboutMagazine .resumeMain { grid-template-columns: 1fr; gap: 32px; }
+  .aboutMagazine .resumePortrait { height: 400px; max-height: none; background-position: 50% 38%; }
+  .aboutMagazine .resumeProfile h3 { font-size: 34px; }
+  .aboutMagazine .resumePosition { font-size: 18px; }
+  .resumeNumbers { gap: 12px; }
+  .resumeNumbers strong { font-size: 30px; }
+  .resumeNumbers span { font-size: 12px; line-height: 1.7; }
+  .strengthsHeader { display: block; margin-bottom: 32px; }
+  .strengthsHeader > p { margin-top: 24px; font-size: 16px; line-height: 1.8; }
+  .strengthsGrid { grid-template-columns: 1fr; gap: 16px; }
+  .strengthCard, .strengthLarge, .strengthWide { grid-column: auto; grid-row: auto; min-height: 0; padding: 24px; }
+  .strengthDesc { margin-top: 20px; }
+  .strengthTags { margin-top: 24px; }
+  .projectSectionHeader { margin-bottom: 32px; }
+  .projectSectionHeader > div:first-child > span, .projectSectionHeader.compact > div:first-child > span, .strengthsHeader > div:first-child > span { font-size: 38px!important; line-height: 1.2; }
+  .projectLead .projectSub { font-size: 18px; }
+  .coreProjectGrid, .productProjectGrid { grid-template-columns: 1fr; gap: 24px; }
+  .coreProjectGrid .projectCover { height: 284px; min-height: 284px; flex-basis: 284px; }
+  .coreProjectGrid .feedCoverPair { height: 216px; gap: 16px; }
+  .feedCoverCaption { gap: 4px; }
+  .feedCoverCaption b { font-size: 11px; }
+  .projectBody h3, .toolCard .projectBody h3 { font-size: 25px; line-height: 1.4; }
+  .projectTags { margin: 20px 0 24px; }
+  .projectSmallCard { display: flex; flex-direction: column; }
+  .projectSmallCard .projectMiniCover { min-height: 240px; height: 240px; }
+  .projectSmallCard .projectBody { padding: 24px; }
+  .toolCardVisual { flex-wrap: nowrap; min-height: 168px; gap: 24px; }
+  .toolCardVisual small { font-size: 12px; }
+  .contactFinal .contactInner { grid-template-columns: 1fr; gap: 40px; padding-block: 64px; }
+  .contactFinal .contactFinalTitle { font-size: clamp(34px,9vw,52px)!important; line-height: 1.25!important; }
+  .contactFinal .contactCopy p { font-size: 16px; line-height: 1.9; }
+  .contactFinal .contactCard { width: 100%; min-width: 0; }
+  .caseContainer, .feedLabPage .caseContainer, .toolCase .caseContainer { width: calc(100% - 40px); }
+  .caseHero h1 { overflow-wrap: anywhere; }
+  .caseHeroLead { font-size: 18px; line-height: 1.85; }
+  .caseSummaryGrid, .caseInsightGrid, .caseStepGrid, .caseRoleGrid { gap: 16px; }
+  .caseSectionHeader h2, .feedLabPage .caseSectionHeader h2, .toolCase .caseSectionHeader h2 { font-size: 30px; line-height: 1.35; }
+  .caseEyebrow { overflow-wrap: anywhere; }
+  .toolHeroLayout { gap: 32px; }
+  .toolHero h1 small { font-size: 28px; }
+  .feedPlayer video { max-height: 72svh; object-fit: contain; }
+  .aiVideoModal, .videoModal { padding: 12px; }
+  .aiVideoModalPanel, .videoModalPanel { width: 100%; max-height: calc(100svh - 24px); overflow-y: auto; padding: 18px; }
+  .aiVideoModalHeader, .videoModalHeader { margin-right: 44px; flex-wrap: wrap; gap: 8px; }
+  .aiVideoModalHeader h3, .videoModalHeader h3 { font-size: 22px; line-height: 1.4; }
+  .aiVideoModalPanel video, .videoModalPanel video { max-height: 58svh; width: 100%; object-fit: contain; }
+  .aiVideoModalClose, .videoModalClose { min-width: 44px; min-height: 44px; top: 12px; right: 12px; }
+}
