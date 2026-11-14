@@ -15,11 +15,16 @@ AI 视频保留完整 11 分 06 秒的原画质 HLS，另提供 768×432、H.264
 
 校园视频修复重复备用元素 ID，并始终提供有效的独立播放链接。信息流与王朝视频沿用原 MP4，保留原生播放控件。
 
+线上复验发现静态 MP4 请求的 `Range` 被返回为 `200`，手机拖动到未缓冲位置会回到开头。`public/_worker.js` 为 MP4 提供精确的 `206 Content-Range`，按流截取字节，不将整个视频读入内存。构建过程生成精确的 `_routes.json`，仅 MP4 请求进入函数，其他页面和资源继续静态托管。
+
+实现依据：[Pages Advanced Mode](https://developers.cloudflare.com/pages/functions/advanced-mode/)、[函数路由](https://developers.cloudflare.com/pages/functions/routing/)、[FixedLengthStream 与 Content-Length](https://developers.cloudflare.com/workers/runtime-apis/response/)。
+
 验证命令：
 
 ```sh
 node --test scripts/copy-runtime-assets.test.mjs
 node --experimental-vm-modules --test scripts/video-source.test.mjs
+node --test scripts/video-range.test.mjs
 pnpm run build
 ```
 

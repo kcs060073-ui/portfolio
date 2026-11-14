@@ -1,5 +1,5 @@
-import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, statSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { dirname, join, relative } from 'node:path';
 
 const root = process.cwd();
 const dist = join(root, 'dist');
@@ -51,6 +51,7 @@ for (const assetPath of assetPaths) {
 
 console.log(`Copied ${assetPaths.size} runtime asset paths into dist.`);
 
+const videoRoutes = [];
 function checkAssetSizes(directory) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
     const file = join(directory, entry.name);
@@ -58,6 +59,7 @@ function checkAssetSizes(directory) {
     else if (statSync(file).size > 25 * 1024 * 1024) {
       throw new Error(`Asset exceeds the Cloudflare Pages 25 MiB limit: ${file}`);
     }
+    if (entry.isFile() && entry.name.endsWith('.mp4')) videoRoutes.push('/' + relative(dist, file).split('\\').join('/'));
     if (entry.isFile() && entry.name.endsWith('.m3u8')) {
       const playlist = readFileSync(file, 'utf8');
       const references = [
@@ -73,3 +75,9 @@ function checkAssetSizes(directory) {
   }
 }
 checkAssetSizes(dist);
+// Only video files invoke the byte-range Worker. HTML, CSS, images and HLS
+// playlists/segments continue through Pages' ordinary static serving.
+if (existsSync(join(dist, '_worker.js'))) {
+  if (videoRoutes.length > 100) throw new Error('Video routes exceed the Pages Functions routing limit.');
+  writeFileSync(join(dist, '_routes.json'), JSON.stringify({ version: 1, include: videoRoutes, exclude: [] }, null, 2));
+}
