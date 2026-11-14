@@ -62,7 +62,7 @@ test('rejects an incomplete HLS playlist including a missing initialization file
 
 test('limits the deployed Worker to existing MP4 routes', () => {
   const { root, write, run } = fixture();
-  write('dist/_worker.js', 'export default {}');
+  write('dist/_worker.js', 'const VIDEO_SIZES = {}; export default {}');
   const result = run();
   assert.equal(result.status, 0, result.stderr);
   const routes = JSON.parse(readFileSync(join(root, 'dist/_routes.json'), 'utf8'));
@@ -70,4 +70,5 @@ test('limits the deployed Worker to existing MP4 routes', () => {
   assert.ok(routes.include.includes('/assets/projects/wangchao-hichajiu-video.mp4'));
   assert.ok(routes.include.every((route) => route.startsWith('/assets/') && route.endsWith('.mp4') && !route.includes('\\')));
   assert.ok(routes.include.length <= 100);
+  assert.match(readFileSync(join(root, 'dist/_worker.js'), 'utf8'), /wangchao-hichajiu-video\.mp4":5/);
 });

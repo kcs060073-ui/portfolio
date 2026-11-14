@@ -52,6 +52,7 @@ for (const assetPath of assetPaths) {
 console.log(`Copied ${assetPaths.size} runtime asset paths into dist.`);
 
 const videoRoutes = [];
+const videoSizes = {};
 function checkAssetSizes(directory) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
     const file = join(directory, entry.name);
@@ -59,7 +60,11 @@ function checkAssetSizes(directory) {
     else if (statSync(file).size > 25 * 1024 * 1024) {
       throw new Error(`Asset exceeds the Cloudflare Pages 25 MiB limit: ${file}`);
     }
-    if (entry.isFile() && entry.name.endsWith('.mp4')) videoRoutes.push('/' + relative(dist, file).split('\\').join('/'));
+    if (entry.isFile() && entry.name.endsWith('.mp4')) {
+      const route = '/' + relative(dist, file).split('\\').join('/');
+      videoRoutes.push(route);
+      videoSizes[route] = statSync(file).size;
+    }
     if (entry.isFile() && entry.name.endsWith('.m3u8')) {
       const playlist = readFileSync(file, 'utf8');
       const references = [
@@ -80,4 +85,7 @@ checkAssetSizes(dist);
 if (existsSync(join(dist, '_worker.js'))) {
   if (videoRoutes.length > 100) throw new Error('Video routes exceed the Pages Functions routing limit.');
   writeFileSync(join(dist, '_routes.json'), JSON.stringify({ version: 1, include: videoRoutes, exclude: [] }, null, 2));
+  const workerFile = join(dist, '_worker.js');
+  const worker = readFileSync(workerFile, 'utf8');
+  writeFileSync(workerFile, worker.replace('const VIDEO_SIZES = {};', `const VIDEO_SIZES = ${JSON.stringify(videoSizes)};`));
 }

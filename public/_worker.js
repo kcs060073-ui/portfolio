@@ -1,5 +1,6 @@
 // Pages' static video responses can ignore Range. Give native mobile players
 // exact byte responses without buffering an entire video in Worker memory.
+const VIDEO_SIZES = {};
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -7,8 +8,10 @@ export default {
     const response = await env.ASSETS.fetch(request);
     const range = request.headers.get('range');
     if (!range || response.status !== 200) return response;
-    const size = Number(response.headers.get('content-length'));
-    if (!Number.isSafeInteger(size) || size <= 0 || !response.headers.get('content-type')?.startsWith('video/')) return response;
+    // The ASSETS binding can omit Content-Length even though the public
+    // response has one. Build-time sizes also cover that internal response.
+    const size = VIDEO_SIZES[url.pathname] || Number(response.headers.get('content-length'));
+    if (!Number.isSafeInteger(size) || size <= 0) return response;
     const ifRange = request.headers.get('if-range');
     if (ifRange && ifRange !== response.headers.get('etag') && ifRange !== response.headers.get('last-modified')) return response;
     const match = /^bytes=(\d*)-(\d*)$/.exec(range);
@@ -22,6 +25,8 @@ export default {
       return new Response(null, { status: 416, headers: { 'Content-Range': `bytes */${size}`, 'Accept-Ranges': 'bytes' } });
     }
     const headers = new Headers(response.headers);
+    headers.set('Content-Type', 'video/mp4');
+    headers.set('X-Video-Range', 'stream-v2');
     headers.set('Content-Range', `bytes ${start}-${end}/${size}`);
     headers.set('Accept-Ranges', 'bytes');
     headers.set('Content-Length', String(end - start + 1));
